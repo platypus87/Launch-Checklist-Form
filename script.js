@@ -34,15 +34,15 @@ window.addEventListener("load", function(){
       let cargoStat = document.getElementById("cargoStatus");
 
 
-      if(pilot.value === ""||copilot.value===""){
+      if(pilot.value === ""||copilot.value==="" || isNaN(pilot.value)===false || isNaN(copilot.value)===false){
          pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;   
          copilotStatus.innerHTML = `Co-Pilot ${copilot.value} is ready for launch`;
          fuelStat.innerHTML = `Fuel: ${fuel.value} L`;
          cargoStat.innerHTML = `Cargo Mass: ${mass.value} kg`;
-         items.style.visibility = "visible";
+        //items.style.visibility = "visible";
          launchStatus.innerHTML = "Shuttle not ready for launch";
-         launchStatus.style.color = "red";
-         alert("Two people needed to fly the ship");
+         //launchStatus.style.color = "red";
+         alert("Invalid Input");
          event.preventDefault();
       }else if(isNaN(fuel.value)===true){
          alert('Enter a number for fuel');
