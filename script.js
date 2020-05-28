@@ -2,6 +2,24 @@
 
 window.addEventListener("load", function(){
    
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+            response.json().then(function(json){
+               const div = document.getElementById("missionTarget");
+               let planet = Math.round(Math.random()*6);
+               div.innerHTML = `
+               <h2>Mission Destination</h2>
+                  <ol>
+                     <li>Name: ${json[planet].name}</li>
+                     <li>Diameter: ${json[planet].diameter}</li>
+                     <li>Star: ${json[planet].star}</li>
+                     <li>Distance from Earth: ${json[planet].distance}</li>
+                     <li>Number of Moons: ${json[planet].moons}</li>
+                  </ol>
+                  <img src="${json[planet].image}"></img>
+                  `;
+            });   
+         });
+
    let button = document.querySelector("button");
    button.addEventListener("click",function(event){
       let pilot = document.querySelector("input[name=pilotName]");
@@ -62,23 +80,23 @@ window.addEventListener("load", function(){
          cargoStat.innerHTML = `Cargo mass low enough for launch`;
          launchStatus.innerHTML = "Shuttle ready for launch";
          launchStatus.style.color = "green";
-         fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
-            response.json().then(function(json){
-               const div = document.getElementById("missionTarget");
-               let planet = Math.round(Math.random()*5);
-               div.innerHTML = `
-               <h2>Mission Destination</h2>
-                  <ol>
-                     <li>Name: ${json[planet].name}</li>
-                     <li>Diameter: ${json[planet].diameter}</li>
-                     <li>Star: ${json[planet].star}</li>
-                     <li>Distance from Earth: ${json[planet].distance}</li>
-                     <li>Number of Moons: ${json[planet].moons}</li>
-                  </ol>
-                  <img src="${json[planet].image}"></img>
-                  `;
-            });   
-         });
+         // fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+         //    response.json().then(function(json){
+         //       const div = document.getElementById("missionTarget");
+         //       let planet = Math.round(Math.random()*6);
+         //       div.innerHTML = `
+         //       <h2>Mission Destination</h2>
+         //          <ol>
+         //             <li>Name: ${json[planet].name}</li>
+         //             <li>Diameter: ${json[planet].diameter}</li>
+         //             <li>Star: ${json[planet].star}</li>
+         //             <li>Distance from Earth: ${json[planet].distance}</li>
+         //             <li>Number of Moons: ${json[planet].moons}</li>
+         //          </ol>
+         //          <img src="${json[planet].image}"></img>
+         //          `;
+         //    });   
+         // });
          event.preventDefault();
       }   
    });
@@ -96,3 +114,21 @@ window.addEventListener("load", function(){
 </ol>
 <img src="${}">
 */
+
+// fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+//             response.json().then(function(json){
+//                const div = document.getElementById("missionTarget");
+//                let planet = Math.round(Math.random()*6);
+//                div.innerHTML = `
+//                <h2>Mission Destination</h2>
+//                   <ol>
+//                      <li>Name: ${json[planet].name}</li>
+//                      <li>Diameter: ${json[planet].diameter}</li>
+//                      <li>Star: ${json[planet].star}</li>
+//                      <li>Distance from Earth: ${json[planet].distance}</li>
+//                      <li>Number of Moons: ${json[planet].moons}</li>
+//                   </ol>
+//                   <img src="${json[planet].image}"></img>
+//                   `;
+//             });   
+//          });
