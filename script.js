@@ -45,18 +45,21 @@ window.addEventListener("load", function(){
          alert(`${fuel.value} is an invald entry.`);
          event.preventDefault();
       }
+      
+      else if(isNaN(mass.value)===true){
+         alert(`${mass.value} is an invalid entry.`)
+         event.preventDefault();
+      }
       else if(fuel.value<10000){
+         if(mass.value>10000){
+            cargoStat.innerHTML = `${mass.value}kg is too heavy to launch`;
+         }
          pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;   
          copilotStatus.innerHTML = `Co-Pilot ${copilot.value} is ready for launch`;
          fuelStat.innerHTML = `${fuel.value} L is not enough fuel!`;
          launchStatus.innerHTML = "Shuttle not ready for launch";
          launchStatus.style.color = "red";
          items.style.visibility = "visible";
-         alert(`${fuel.value} L is not enough fuel!`);
-         event.preventDefault();
-      }
-      else if(isNaN(mass.value)===true){
-         alert(`${mass.value} is an invalid entry.`)
          event.preventDefault();
       }
       else if(mass.value>10000){
@@ -67,7 +70,6 @@ window.addEventListener("load", function(){
          launchStatus.innerHTML = "Shuttle not ready for launch";
          launchStatus.style.color = "red";
          items.style.visibility = "visible";
-         alert(`You're gonna need a bigger boat; ${mass.value} kg is too heavy.`)
          event.preventDefault();
       } else {
          pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;   
