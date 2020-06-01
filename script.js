@@ -5,7 +5,7 @@ window.addEventListener("load", function(){
    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
             response.json().then(function(json){
                const div = document.getElementById("missionTarget");
-               let planet = Math.round(Math.random()*6);
+               let planet = Math.round(Math.random()*5);
                div.innerHTML = `
                <h2>Mission Destination</h2>
                   <ol>
@@ -33,102 +33,51 @@ window.addEventListener("load", function(){
       let fuelStat = document.getElementById("fuelStatus");
       let cargoStat = document.getElementById("cargoStatus");
 
-
-      if(pilot.value === ""||copilot.value==="" || isNaN(pilot.value)===false || isNaN(copilot.value)===false){
+      if (isNaN(pilot.value)===false){
+         alert(`${pilot.value} is an invalid entry, please try again.`);
+         event.preventDefault();
+      }
+      else if(isNaN(copilot.value)===false){
+         alert(`${copilot.value} is not a valid entry.`);
+         event.preventDefault();
+      }
+      else if(isNaN(fuel.value)===true){
+         alert(`${fuel.value} is an invald entry.`);
+         event.preventDefault();
+      }
+      else if(fuel.value<10000){
          pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;   
          copilotStatus.innerHTML = `Co-Pilot ${copilot.value} is ready for launch`;
-         fuelStat.innerHTML = `Fuel: ${fuel.value} L`;
-         cargoStat.innerHTML = `Cargo Mass: ${mass.value} kg`;
-        //items.style.visibility = "visible";
-         launchStatus.innerHTML = "Shuttle not ready for launch";
-         //launchStatus.style.color = "red";
-         alert("Invalid Input");
-         event.preventDefault();
-      }else if(isNaN(fuel.value)===true){
-         alert('Enter a number for fuel');
-         event.preventDefault();
-      }else if(fuel.value<10000){
-         pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;   
-         copilotStatus.innerHTML = `Co-Pilot ${copilot.value} is ready for launch`;
-         fuelStat.innerHTML = `Fuel: ${fuel.value} L`;
-         cargoStat.innerHTML = `Cargo Mass: ${mass.value} kg`;
+         fuelStat.innerHTML = `${fuel.value} L is not enough fuel!`;
          launchStatus.innerHTML = "Shuttle not ready for launch";
          launchStatus.style.color = "red";
          items.style.visibility = "visible";
-         alert("Insufficient Fuel");
+         alert(`${fuel.value} L is not enough fuel!`);
          event.preventDefault();
-      }else if(isNaN(mass.value)===true){
-         alert("Enter a number for mass");
+      }
+      else if(isNaN(mass.value)===true){
+         alert(`${mass.value} is an invalid entry.`)
          event.preventDefault();
       }
       else if(mass.value>10000){
          pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;   
          copilotStatus.innerHTML = `Co-Pilot ${copilot.value} is ready for launch`;
-         fuelStat.innerHTML = `Fuel: ${fuel.value} L`;
-         cargoStat.innerHTML = `Cargo Mass: ${mass.value} kg`;
-         items.style.visibility = "visible";
+         fuelStat.innerHTML = `${fuel.value} is sufficient for launch.`;
+         cargoStat.innerHTML = `${mass.value} kg is to heavy to launch!`
          launchStatus.innerHTML = "Shuttle not ready for launch";
          launchStatus.style.color = "red";
          items.style.visibility = "visible";
-         alert("You're gonna need a bigger boat");
+         alert(`You're gonna need a bigger boat; ${mass.value} kg is too heavy.`)
          event.preventDefault();
-      }else if (pilot.value !== "" && copilot.value !== "" && fuel.value > 10000 && mass.value < 10000){
-         items.style.visibility = "visible";
+      } else {
          pilotStatus.innerHTML = `Pilot ${pilot.value} is ready for launch`;   
          copilotStatus.innerHTML = `Co-Pilot ${copilot.value} is ready for launch`;
-         fuelStat.innerHTML = `Fuel: ${fuel.value} L`;
-         cargoStat.innerHTML = `Cargo mass low enough for launch`;
-         launchStatus.innerHTML = "Shuttle ready for launch";
+         fuelStat.innerHTML = `${fuel.value} is sufficient for launch.`;
+         cargoStat.innerHTML = `${mass.value} kg is light enough to launch!`
+         launchStatus.innerHTML = "Shuttle is ready for launch";
          launchStatus.style.color = "green";
-         // fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
-         //    response.json().then(function(json){
-         //       const div = document.getElementById("missionTarget");
-         //       let planet = Math.round(Math.random()*6);
-         //       div.innerHTML = `
-         //       <h2>Mission Destination</h2>
-         //          <ol>
-         //             <li>Name: ${json[planet].name}</li>
-         //             <li>Diameter: ${json[planet].diameter}</li>
-         //             <li>Star: ${json[planet].star}</li>
-         //             <li>Distance from Earth: ${json[planet].distance}</li>
-         //             <li>Number of Moons: ${json[planet].moons}</li>
-         //          </ol>
-         //          <img src="${json[planet].image}"></img>
-         //          `;
-         //    });   
-         // });
+         items.style.visibility = "visible";
          event.preventDefault();
-      }   
+      }
    });
-   
 });
-
-/* This block of code shows how to format the HTML once you fetch some planetary JSON!
-<h2>Mission Destination</h2>
-<ol>
-   <li>Name: ${}</li>
-   <li>Diameter: ${}</li>
-   <li>Star: ${}</li>
-   <li>Distance from Earth: ${}</li>
-   <li>Number of Moons: ${}</li>
-</ol>
-<img src="${}">
-*/
-
-// fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
-//             response.json().then(function(json){
-//                const div = document.getElementById("missionTarget");
-//                let planet = Math.round(Math.random()*6);
-//                div.innerHTML = `
-//                <h2>Mission Destination</h2>
-//                   <ol>
-//                      <li>Name: ${json[planet].name}</li>
-//                      <li>Diameter: ${json[planet].diameter}</li>
-//                      <li>Star: ${json[planet].star}</li>
-//                      <li>Distance from Earth: ${json[planet].distance}</li>
-//                      <li>Number of Moons: ${json[planet].moons}</li>
-//                   </ol>
-//                   <img src="${json[planet].image}"></img>
-//                   `;
-//             });   
-//          });
